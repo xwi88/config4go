@@ -16,6 +16,6 @@ name = "lino"
 host = "127.0.0.1"
 port = "6379"
 password = ""
-idleTimeout = 20
+idleTimeout = '20s'
 maxIdle = 2
 maxActive = 5

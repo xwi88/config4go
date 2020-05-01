@@ -2,6 +2,7 @@ package config4go
 
 import (
 	"testing"
+	"time"
 )
 
 func Test_LoadConfig(t *testing.T) {
@@ -14,7 +15,7 @@ func Test_LoadConfig(t *testing.T) {
 		TablePrefix        string
 		MaxOpenConnections int
 		MaxIdleConnections int
-		ConnMaxLifetime    int
+		ConnMaxLifetime    time.Duration
 		Debug              bool
 	}
 
@@ -22,7 +23,7 @@ func Test_LoadConfig(t *testing.T) {
 		Host        string
 		Port        string
 		Password    string
-		IdleTimeout int
+		IdleTimeout time.Duration
 		MaxIdle     int
 		MaxActive   int
 	}
@@ -34,28 +35,28 @@ func Test_LoadConfig(t *testing.T) {
 	}
 
 	var conf testConf
-	testfile := ""
-	err := LoadConfig(testfile, &conf)
+	testFile := ""
+	err := LoadConfig(testFile, &conf)
 	if err != nil {
 		t.Log(err)
 	}
 
-	testfile = "./testdata/app_test.toml"
-	err = LoadConfig(testfile, &conf)
+	testFile = "./testdata/app_test.toml"
+	err = LoadConfig(testFile, &conf)
 	if err != nil {
 		t.Error(err)
 	}
 	t.Logf("conf content: %#v", conf)
 
-	testfile = "./testdata/app_test_no_exist.toml"
-	err = LoadConfig(testfile, &conf)
+	testFile = "./testdata/app_test_no_exist.toml"
+	err = LoadConfig(testFile, &conf)
 	if err != nil {
 		t.Log(err)
 	}
 
-	testfile = "./testdata/app_test_bad.toml"
+	testFile = "./testdata/app_test_bad.toml"
 	var conf1 testConf
-	err = LoadConfig(testfile, &conf1)
+	err = LoadConfig(testFile, &conf1)
 	if err != nil {
 		t.Log(err)
 	}
